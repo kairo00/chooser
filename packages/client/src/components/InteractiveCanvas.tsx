@@ -86,7 +86,7 @@ export function InteractiveCanvas({
   return (
     <div
       ref={areaRef}
-      className="bg-grid-ink w-screen h-screen relative overflow-hidden"
+      className="bg-grid-ink w-screen h-screen relative overflow-hidden no-touch-select"
       style={{ touchAction: 'none', userSelect: 'none', cursor: 'crosshair' }}
       onPointerDown={handlePointerDown}
       onPointerMove={handlePointerMove}
