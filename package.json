@@ -1,0 +1,15 @@
+{
+  "name": "chooser",
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "concurrently -n server,client -c blue,green \"npm run dev --workspace=packages/server\" \"npm run dev --workspace=packages/client\"",
+    "dev:network": "export LOCAL_IP=$(node -e \"const nets = require('os').networkInterfaces(); for (const name of Object.keys(nets)) { for (const net of nets[name]) { if ((net.family === 'IPv4' || net.family === 4) && !net.internal) { console.log(net.address); process.exit(0); } } } console.log('localhost');\") && echo \"Adresse IP locale détectée : $LOCAL_IP\" && VITE_SERVER_URL=http://$LOCAL_IP:3001 CLIENT_ORIGIN=http://$LOCAL_IP:5173 concurrently -n server,client -c blue,green \"npm run dev --workspace=packages/server\" \"npm run dev --workspace=packages/client -- --host\"",
+    "build": "npm run build --workspace=packages/shared && npm run build --workspace=packages/server && npm run build --workspace=packages/client"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}

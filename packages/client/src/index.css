@@ -1,0 +1,206 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── CSS Custom Properties ────────────────────────────────────────────────── */
+:root {
+  /* Dark palette */
+  --ink:       #080808;
+  --surface:   #111111;
+  --surface-2: #1C1C1C;
+  --border:    #2A2A2A;
+
+  /* Neon accents */
+  --acid:    #FFE500;
+  --magenta: #FF2D78;
+  --cyan:    #00E5CC;
+
+  /* Text */
+  --text:  #EDEDED;
+  --muted: #5A5A5A;
+
+  /* Shadow presets */
+  --shadow-brutal:       6px 6px 0px #000000;
+  --shadow-brutal-sm:    4px 4px 0px #000000;
+  --shadow-neon-acid:    5px 5px 0px #FFE500;
+  --shadow-neon-magenta: 5px 5px 0px #FF2D78;
+}
+
+/* ── Base reset ───────────────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; }
+
+html, body, #root {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+body {
+  font-family: 'Syne', sans-serif;
+  background-color: var(--ink);
+  color: var(--text);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ── Background textures ──────────────────────────────────────────────────── */
+
+/* Dark dot-grid — primary page background */
+.bg-dot-dark {
+  background-color: var(--ink);
+  background-image: radial-gradient(
+    circle,
+    rgba(255, 255, 255, 0.045) 1px,
+    transparent 1px
+  );
+  background-size: 28px 28px;
+}
+
+/* Light grid — kept for InteractiveCanvas compatibility */
+.bg-grid-cream {
+  background-color: #FAF8F0;
+  background-image:
+    linear-gradient(rgba(0,0,0,0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,0,0,0.06) 1px, transparent 1px);
+  background-size: 44px 44px;
+}
+
+/* Dark line-grid — InteractiveCanvas */
+.bg-grid-ink {
+  background-color: var(--ink);
+  background-image:
+    linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+  background-size: 60px 60px;
+}
+
+/* ── Neubrutalism utilities ───────────────────────────────────────────────── */
+@layer utilities {
+  .border-brutal {
+    border: 3px solid #000;
+  }
+
+  /* ── Buttons ─────────────────────────────────────────────────────────────── */
+
+  /* Yellow CTA — acid fill, thick black border, black shadow (dark theme) */
+  .btn-acid {
+    position: relative;
+    background-color: var(--acid);
+    border: 3px solid #000;
+    box-shadow: var(--shadow-brutal);
+    cursor: pointer;
+    transition: box-shadow 55ms ease, transform 55ms ease;
+  }
+  .btn-acid:active {
+    box-shadow: 2px 2px 0px #000;
+    transform: translate(4px, 4px);
+  }
+  .btn-acid:disabled {
+    opacity: 0.35;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: var(--shadow-brutal);
+  }
+
+  /* Magenta CTA — magenta fill, thick black border, black shadow */
+  .btn-magenta {
+    position: relative;
+    background-color: var(--magenta);
+    border: 3px solid #000;
+    box-shadow: var(--shadow-brutal);
+    cursor: pointer;
+    transition: box-shadow 55ms ease, transform 55ms ease;
+  }
+  .btn-magenta:active {
+    box-shadow: 2px 2px 0px #000;
+    transform: translate(4px, 4px);
+  }
+  .btn-magenta:disabled {
+    opacity: 0.35;
+    cursor: not-allowed;
+  }
+
+  /* Dark surface button — surface bg, neon yellow shadow */
+  .btn-dark {
+    position: relative;
+    background-color: var(--surface-2);
+    border: 2px solid var(--border);
+    box-shadow: var(--shadow-neon-acid);
+    cursor: pointer;
+    transition: box-shadow 55ms ease, transform 55ms ease;
+  }
+  .btn-dark:active {
+    box-shadow: 1px 1px 0px var(--acid);
+    transform: translate(4px, 4px);
+  }
+
+  /* ── Inputs ──────────────────────────────────────────────────────────────── */
+
+  .input-dark {
+    background-color: var(--surface-2);
+    border: 2px solid var(--border);
+    color: var(--text);
+    outline: none;
+    transition: border-color 120ms ease, box-shadow 120ms ease;
+    font-family: 'Syne Mono', ui-monospace, monospace;
+  }
+  .input-dark::placeholder {
+    color: var(--muted);
+  }
+  .input-dark:focus {
+    border-color: var(--acid);
+    box-shadow: 0 0 0 2px rgba(255, 229, 0, 0.15);
+  }
+
+  /* ── Cards ───────────────────────────────────────────────────────────────── */
+
+  /* Surface card with neon left accent border */
+  .card-dark {
+    background-color: var(--surface);
+    border: 2px solid var(--border);
+  }
+
+  .card-dark-acid {
+    background-color: var(--surface);
+    border: 2px solid var(--border);
+    border-left: 4px solid var(--acid);
+  }
+
+  .card-dark-magenta {
+    background-color: var(--surface);
+    border: 2px solid var(--border);
+    border-left: 4px solid var(--magenta);
+  }
+
+  /* ── Legacy button (InteractiveCanvas compatibility) ─────────────────────── */
+  .btn-brutal {
+    position: relative;
+    border: 3px solid #000;
+    box-shadow: 6px 6px 0px #000;
+    transition: box-shadow 60ms ease, transform 60ms ease;
+    cursor: pointer;
+  }
+  .btn-brutal:active {
+    box-shadow: 2px 2px 0px #000;
+    transform: translate(4px, 4px);
+  }
+  .btn-brutal:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+    transform: none;
+  }
+
+  /* ── Legacy input (InteractiveCanvas compatibility) ──────────────────────── */
+  .input-brutal {
+    border: 3px solid #000;
+    box-shadow: var(--shadow-brutal-sm);
+    outline: none;
+    transition: background-color 150ms ease, box-shadow 150ms ease;
+  }
+  .input-brutal:focus {
+    background-color: var(--acid);
+    box-shadow: var(--shadow-brutal);
+  }
+}
